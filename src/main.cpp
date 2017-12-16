@@ -5,15 +5,32 @@
 #include <flyingFishHelper.h>
 #include <rgbLED.h>
 
-// our objects
-
-rgbLED LED(D2, D3, D4);
-flyingFish MoistureSensor(D5, A1);
+// our objects and variables
+rgbLED LED(2, 3, 4);
+flyingFish MoistureSensor(5, A1);
+unsigned int moisture;
 
 void setup() {
-    // put your setup code here, to run once:
+    LED.out();
+    Serial.begin(9600);
+    Serial.println("Water_Me. Using a Moisture Sensor.");
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+    moisture = MoistureSensor.analogread();
+    Serial.print("Analog reading: ");
+    Serial.println(moisture);
+    if (moisture >= 800) {
+        LED.out();
+        LED.singleon('b');
+    }
+    if ((moisture >= 500) & (moisture < 800)) {
+        LED.out();
+        LED.singleon('g');
+    }
+    if (moisture < 500) {
+        LED.out();
+        LED.singleon('r');
+    }
+    delay(1000);
 }
