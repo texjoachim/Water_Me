@@ -22,15 +22,15 @@ void loop() {
     Serial.println(moisture);
     if (moisture >= 800) {
         LED.out();
-        LED.singleon('b');
+        LED.on('b');
     }
     if ((moisture >= 500) & (moisture < 800)) {
         LED.out();
-        LED.singleon('g');
+        LED.on('g');
     }
     if (moisture < 500) {
         LED.out();
-        LED.singleon('r');
+        LED.on('r');
     }
     delay(1000);
 }
